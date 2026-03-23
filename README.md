@@ -26,14 +26,14 @@ The binary responsible for the API on port 8001 processes incoming requests by p
 ### Root Cause
 When a request is sent to `http://{IP}:8001/[resource]?mode=[arg]`, the application splits the string based on `/` and `?` delimiters. The extracted `[resource]` string is then concatenated with the string `./html/` and stored in a fixed-size stack buffer.
 
-![Source Code Analysis](code.png)
+![Source Code Analysis](doc/code.png)
 
 The application fails to validate the length of the `[resource]` input before copying it into the **260-byte buffer**. By providing a resource name exceeding this limit, the stack is corrupted.
 
 ### Exploitability & Binary Protections
 An assessment of the `p2pcam` binary protections shows a complete lack of modern mitigations, significantly lowering the bar for exploitation:
 
-![Binary Protections](binprot.png)
+![Binary Protections](doc/binprot.png)
 
 ---
 
@@ -47,9 +47,9 @@ The following request triggers a buffer overflow and crashes the service by over
 ### 2. Remote Code Execution (RCE)
 By calculating the offset to the return pointer, we can redirect execution to a gadget within the binary that initializes a **Telnet server**. 
 
-In our testing, we successfully redirected execution to the Telnet initialization gadget. While the service crashes shortly after execution due to stack misalignment, the Telnet port remains open long enough for root access. 
+In our testing, we successfully redirected execution to the Telnet initialization gadget. While the service crashes shortly after execution due to stack misalignment, the Telnet port remains open long enough to confirm execution. 
 
-![Exploit Success](exploit.png)
+![Exploit Success](doc/exploit.png)
 
 **Note:** Persistence could be achieved by chaining a second gadget to a `sleep()` function or a loop to prevent the immediate crash, though this was not implemented during this research phase.
 
