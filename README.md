@@ -1,7 +1,21 @@
-# CVE-2024-51348: Unauthenticated Remote Code Execution in BS Petcam
+# CVE-2024-51348: Unauthenticated Remote Code Execution in BS Producten Petcam
+
+## Vulnerability Metadata
+
+| Field | Details |
+| :--- | :--- |
+| **Vendor** | BS Producten |
+| **Product** | Petcam |
+| **Affected Version** | Last tested version: 33.1.0.0818, unkown if latest update have patched this |
+| **Component** | P2P API Service (port 8001) |
+| **Attack Type** | Proximity / LAN |
+| **CWE ID** | CWE-121: Stack-based Buffer Overflow, CWE-120: Buffer Copy without Checking Size |
+| **CVSS 3.1 Vector** | `CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
+| **Base Score** | 8.8 (High) |
+| **Impact** | Code Execution, Denial of Service |
 
 ## Executive Summary
-A critical stack-based buffer overflow vulnerability was identified in the P2P API service of BS Petcam firmware. The vulnerability exists in the handling of URI resources on port 8001. By sending a specially crafted HTTP request, an unauthenticated attacker within network range can overwrite the instruction pointer and achieve Remote Code Execution (RCE). 
+A critical stack-based buffer overflow vulnerability was identified in the P2P API service of BS Producten Petcam firmware. The vulnerability exists in the handling of URI resources on port 8001. By sending a specially crafted HTTP request, an unauthenticated attacker within network range can overwrite the instruction pointer and achieve Remote Code Execution (RCE). 
 
 Due to the device emitting an unauthenticated "local mode" wireless network by default, this vulnerability can be exploited by any attacker in physical proximity without prior credentials.
 
@@ -73,3 +87,20 @@ This vulnerability allows for full system compromise. An attacker can:
 * Implement `strncpy()` or similar bounds-checked functions when handling URI resources.
 * Enable modern binary protections during the compilation of the binary.
 * Secure the "Local Mode" network with a password.
+
+## Mitigations & Workarounds
+As no official patch is currently available from the vendor, users are advised to take the following manual precautions to secure their devices:
+
+* **Network Isolation:** Disconnect the device from the internet and place it on a dedicated, isolated VLAN with no access to the primary internal network.
+* **Disable ONVIF:** If the camera interface allows it, disable the ONVIF service and any related P2P settings entirely.
+* **Disable "Local Mode":** Users should avoid using the "Local Mode" feature, as it emits an unauthenticated wireless network, allowing any attacker in physical proximity to bypass network security controls.
+
+---
+
+## Disclosure Timeline
+| Date | Action |
+| :--- | :--- |
+| **2024-07-08** | Vulnerability discovered during security research. |
+| **2024-07-10** | Attempted to contact vendor via support email, phone, and website contact forms. No response received. |
+| **2024-08-15** | Follow-up attempt to reach vendor security or technical teams. No response received. |
+| **2026-03-25** | Public disclosure of vulnerability details due to lack of vendor response. |
