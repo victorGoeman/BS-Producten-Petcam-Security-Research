@@ -15,9 +15,9 @@ In "Local Mode," the device acts as a gateway with the following open ports:
 * **8001 (API):** Custom P2P service (Exploitation target)
 
 ### Hardcoded Credentials
+The `p2pcam` binary, which manages the camera's core services, was found to contain several hardcoded secrets:
 * **System Root:** `root:cxlinux`
 * **ONVIF/API:** `admin:12345678`
-* **Static Keys:** Encryption strings like `a9m0d3enckEy$k3y` found in binaries.
 
 ### Unauthenticated Video Stream
 The RTSP server on port 554 requires no credentials. The live feed is accessible via VLC:
