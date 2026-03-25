@@ -1,4 +1,4 @@
-# Security Audit: BS Producten Petcam
+# BS Producten Petcam: Security Research
 
 ## 1. Overview
 Findings for the BS Producten Petcam (Firmware 33.1.0.0818). A chain of vulnerabilities allows unauthenticated root access via proximity or LAN.
