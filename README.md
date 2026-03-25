@@ -31,3 +31,11 @@ The RTSP server on port 554 requires no credentials. The live feed is accessible
 | :--- | :--- | :--- | :--- |
 | **[CVE-2025-69988](./CVE-2025-69988.md)** | Network | Medium | Unauthenticated "Local Mode" Wi-Fi AP. |
 | **[CVE-2024-51348](./CVE-2024-51348.md)** | Buffer overflow | High | Stack-based Buffer Overflow (RCE) on Port 8001. |
+
+
+---
+## Research Context
+This vulnerability was discovered and documented as part of an academic security audit performed at **DistriNet (KU Leuven)**. 
+
+* **Research Group:** [DistriNet](https://iiw.kuleuven.be/onderzoek/distrinet)
+* **Institution:** KU Leuven, Faculty of Engineering Technology, Technology Campus Ghent.
